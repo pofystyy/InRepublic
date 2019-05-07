@@ -19,7 +19,7 @@ module Inrepublic
           instance_variable_set(:"@#{key}", value)
         end
 
-        @jwt_token = location_tokens[:jwt_token]
+        @jwt_token = location_tokens['jwt_token']
       end
     end
   end

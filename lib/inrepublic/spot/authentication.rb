@@ -1,3 +1,5 @@
+require 'json'
+
 module Inrepublic
   module Spot
     module Authentication
@@ -6,7 +8,7 @@ module Inrepublic
       end
 
       def location_tokens
-        eval connect_to_location.body
+        JSON.parse(connect_to_location.body)
       end
     end
   end
