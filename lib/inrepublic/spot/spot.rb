@@ -1,7 +1,11 @@
+require_relative 'constants'
+
 module Inrepublic
   module Spot
+    include Inrepublic::Spot::Constants
+
     def schedule
-      get('https://resources.aaa.webmil.com.ua/api/v1/spots/schedule', headers: {
+      get(SPOT_SCHEDULE_URI, headers: {
             "Authorization": "Bearer #{jwt_token}"
           })
     end
