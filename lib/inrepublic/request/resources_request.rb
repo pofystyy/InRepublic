@@ -14,8 +14,8 @@ module Inrepublic
         { headers: { "Authorization": "Bearer #{Inrepublic::Request::Auth.jwt_token}" } }
       end
 
-      def self.spot_schedule
-        request(:get, '/spots/schedule', headers_data)
+      def self.spot_schedule(path)
+        request(:get, path, headers_data)
       end
 
       private

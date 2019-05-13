@@ -1,9 +1,7 @@
-require_relative 'inrepublic/spot/client'
+require_relative 'inrepublic/client'
 
 module Inrepublic
-  module Spot
-    def self.client(options)
-      Inrepublic::Spot::Client.new(options)
-    end
+  def self.client(options)
+    Inrepublic::Client.new(options)
   end
 end

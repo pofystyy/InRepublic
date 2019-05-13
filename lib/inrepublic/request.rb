@@ -7,8 +7,8 @@ module Inrepublic
       Inrepublic::Request::Auth.spot_signin(auth_code)
     end
 
-    def spot_schedule
-      Inrepublic::Request::Resources.spot_schedule
+    def spot_schedule(path)
+      Inrepublic::Request::Resources.spot_schedule(path)
     end
   end
 end
