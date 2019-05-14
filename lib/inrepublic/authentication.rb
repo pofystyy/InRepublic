@@ -1,9 +1,13 @@
-require 'json'
+require_relative 'request/resources_request'
 
 module Inrepublic
   module Authentication
     def connect_to_location
-      JSON.parse(spot_signin(options[options.keys.join.to_sym]).body)
+      jwt_token(spot_signin(options))
+    end
+
+    def jwt_token(tokens)
+      Inrepublic::Request::Resources.jwt_token(tokens['jwt_token'])
     end
   end
 end

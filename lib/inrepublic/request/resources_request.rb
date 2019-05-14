@@ -1,4 +1,4 @@
-require_relative 'auth_request'
+require_relative '../response'
 require 'httparty'
 
 module Inrepublic
@@ -10,18 +10,23 @@ module Inrepublic
 
       base_uri INREPUBLIC_RESOURCES_API_URI
 
-      def self.headers_data
-        { headers: { "Authorization": "Bearer #{Inrepublic::Request::Auth.jwt_token}" } }
+      def self.jwt_token(jwt)
+        @jwt_token = jwt
+      end
+
+      def self.options
+        { headers: { "Authorization": "Bearer #{@jwt_token}" } }
       end
 
       def self.spot_schedule(path)
-        request(:get, path, headers_data)
+        request(:get, path, options)
       end
 
       private
 
-      def self.request(http_method, path, options)
-        self.send(http_method, path, options)
+      def self.request(http_method, path, options={})
+        http_response = self.send(http_method, path, options)
+        Inrepublic::Response.create(http_response)
       end
     end
   end
