@@ -1,27 +1,14 @@
-require 'httparty'
+require_relative 'request/auth_request'
+require_relative 'request/resources_request'
 
 module Inrepublic
   module Request
-    def get(url, options = {})
-      request(:get, url, options)
+    def spot_signin(auth_code)
+      Inrepublic::Request::Auth.spot_signin(auth_code)
     end
 
-    def post(url, options = {})
-      request(:post, url, options)
-    end
-
-    def put(url, options = {})
-      request(:put, url, options)
-    end
-
-    def delete(url, options = {})
-      request(:delete, url, options)
-    end
-
-    private
-
-    def request(method, path, options = {})
-      HTTParty.send(method, path, options)
+    def spot_schedule(path)
+      Inrepublic::Request::Resources.spot_schedule(path)
     end
   end
 end
