@@ -1,14 +1,47 @@
-require_relative 'request/auth_request'
-require_relative 'request/resources_request'
+require_relative 'error'
+require 'typhoeus'
+require 'json'
 
 module Inrepublic
   module Request
-    def spot_signin(auth_code)
-      Inrepublic::Request::Auth.spot_signin(auth_code)
+
+    HTTP_OK_CODE = 200
+
+    def get(url, options = {}, auth_headers: false)
+      request(:get, url, options, auth_headers)
     end
 
-    def spot_schedule(path)
-      Inrepublic::Request::Resources.spot_schedule(path)
+    def post(url, options = {}, auth_headers: false)
+      request(:post, url, options, auth_headers)
+    end
+
+    private
+
+    def request(method, path, options = {}, auth_headers)
+       request = Typhoeus::Request.new(
+        path,
+        method:  method,
+        params:  options,
+        headers: (headers_data if auth_headers)
+      )
+      request.run
+      request_response = request.response
+      request_response_code = request_response.code
+
+      if request_response_code == HTTP_OK_CODE
+         json_parse(request_response.body)
+      else
+        Inrepublic::Error.from_response(request_response_code)
+      end
+    end
+
+    def json_parse(request)
+      JSON.parse(request)
+    end
+
+    def headers_data
+      { "Authorization": "Bearer #{jwt_token}" }
     end
   end
 end
+
