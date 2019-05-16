@@ -7,22 +7,22 @@ module InRepublic
 
     HTTP_OK_CODE = 200
 
-    def get(url, options = {}, auth_headers: false)
-      request(:get, url, options, auth_headers)
+    def get(url, options = {}, skip_auth_headers: false)
+      request(:get, url, options, skip_auth_headers)
     end
 
-    def post(url, options = {}, auth_headers: false)
-      request(:post, url, options, auth_headers)
+    def post(url, options = {}, skip_auth_headers: false)
+      request(:post, url, options, skip_auth_headers)
     end
 
     private
 
-    def request(method, path, options = {}, auth_headers)
+    def request(method, path, options = {}, skip_auth_headers)
        request = Typhoeus::Request.new(
         path,
         method:  method,
         params:  options,
-        headers: (headers_data if auth_headers)
+        headers: (headers_data unless skip_auth_headers)
       )
       request.run
       request_response = request.response

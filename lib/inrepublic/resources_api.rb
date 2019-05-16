@@ -11,7 +11,7 @@ module InRepublic
     INREPUBLIC_RESOURCES_API_URI = 'https://resources.aaa.webmil.com.ua/api/v1/spots/schedule'.freeze
 
     def schedule
-      get(INREPUBLIC_RESOURCES_API_URI, auth_headers: true)
+      get(INREPUBLIC_RESOURCES_API_URI)
     end
 
     def bearer=(jwt_token)
