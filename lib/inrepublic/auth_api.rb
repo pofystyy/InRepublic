@@ -1,13 +1,16 @@
 require_relative 'request'
+require 'singleton'
 
 module InRepublic
-  module AuthApi
+  class AuthApi
+    include Singleton
     include InRepublic::Request
 
-    INREPUBLIC_AUTH_API_URI = 'https://auth.aaa.webmil.com.ua/spots/signin'.freeze
+    INREPUBLIC_AUTH_API_URL = 'https://auth.aaa.webmil.com.ua'.freeze
 
     def sign_in(auth_code)
-      post(INREPUBLIC_AUTH_API_URI, auth_code)
+      sign_in_path = '/spots/signin'
+      post("#{INREPUBLIC_AUTH_API_URL}#{sign_in_path}", auth_code)
     end
   end
 end

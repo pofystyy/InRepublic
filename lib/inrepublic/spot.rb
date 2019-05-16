@@ -4,32 +4,17 @@ require_relative 'schedule'
 
 module InRepublic
   class Spot
-    include InRepublic::AuthApi
-    include InRepublic::ResourcesApi
-
-    attr_reader :jwt_token
-
     def initialize(options={})
-      @auth_code = options.values.join
-      tokens = connect_to_location
+      auth_code = options.values.join
+      jwt_token = InRepublic::AuthApi.instance.sign_in('auth_code' => auth_code)['jwt_token']
+      InRepublic::ResourcesApi.instance.bearer=(jwt_token)
 
-      @jwt_token = tokens['jwt_token']
-      get_schedule
+      schedule_data = InRepublic::ResourcesApi.instance.schedule
+      @schedule = InRepublic::Schedule.new(schedule_data)
     end
 
     def work_now?
       @schedule.work_now?
-    end
-
-    private
-
-    def connect_to_location
-      sign_in('auth_code' => @auth_code)
-      # sign_in(auth_code: @auth_code)
-    end
-
-    def get_schedule
-      @schedule = InRepublic::Schedule.new(schedule)
     end
   end
 end
