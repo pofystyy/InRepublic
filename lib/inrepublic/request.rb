@@ -2,7 +2,7 @@ require_relative 'error'
 require 'typhoeus'
 require 'json'
 
-module Inrepublic
+module InRepublic
   module Request
 
     HTTP_OK_CODE = 200
@@ -31,7 +31,7 @@ module Inrepublic
       if request_response_code == HTTP_OK_CODE
          json_parse(request_response.body)
       else
-        Inrepublic::Error.from_response(request_response_code)
+        InRepublic::Error.from_response(request_response_code)
       end
     end
 

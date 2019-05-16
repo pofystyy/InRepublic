@@ -1,4 +1,4 @@
-module Inrepublic
+module InRepublic
   module Error
     def self.from_response(http_response_code)
     raise case http_response_code
@@ -26,49 +26,49 @@ module Inrepublic
     # Raised on errors in the 400-499 range
     class ClientError < Error; end
 
-    # Raised when Inrepublic returns a 400 HTTP status code
+    # Raised when InRepublic returns a 400 HTTP status code
     class BadRequest < ClientError; end
 
-    # Raised when Inrepublic returns a 401 HTTP status code
+    # Raised when InRepublic returns a 401 HTTP status code
     class Unauthorized < ClientError; end
 
-    # Raised when Inrepublic returns a 403 HTTP status code
+    # Raised when InRepublic returns a 403 HTTP status code
     class Forbidden < ClientError; end
 
-    # Raised when Inrepublic returns a 404 HTTP status code
+    # Raised when InRepublic returns a 404 HTTP status code
     class NotFound < ClientError; end
 
-    # Raised when Inrepublic returns a 405 HTTP status code
+    # Raised when InRepublic returns a 405 HTTP status code
     class MethodNotAllowed < ClientError; end
 
-    # Raised when Inrepublic returns a 406 HTTP status code
+    # Raised when InRepublic returns a 406 HTTP status code
     class NotAcceptable < ClientError; end
 
-    # Raised when Inrepublic returns a 409 HTTP status code
+    # Raised when InRepublic returns a 409 HTTP status code
     class Conflict < ClientError; end
 
-    # Raised when Inrepublic returns a 414 HTTP status code
+    # Raised when InRepublic returns a 414 HTTP status code
     class UnsupportedMediaType < ClientError; end
 
-    # Raised when Inrepublic returns a 422 HTTP status code
+    # Raised when InRepublic returns a 422 HTTP status code
     class UnprocessableEntity < ClientError; end
 
-    # Raised when Inrepublic returns a 451 HTTP status code
+    # Raised when InRepublic returns a 451 HTTP status code
     class UnavailableForLegalReasons < ClientError; end
 
     # Raised on errors in the 500-599 range
     class ServerError < Error; end
 
-    # Raised when Inrepublic returns a 500 HTTP status code
+    # Raised when InRepublic returns a 500 HTTP status code
     class InternalServerError < ServerError; end
 
-    # Raised when Inrepublic returns a 501 HTTP status code
+    # Raised when InRepublic returns a 501 HTTP status code
     class NotImplemented < ServerError; end
 
-    # Raised when Inrepublic returns a 502 HTTP status code
+    # Raised when InRepublic returns a 502 HTTP status code
     class BadGateway < ServerError; end
 
-    # Raised when Inrepublic returns a 503 HTTP status code
+    # Raised when InRepublic returns a 503 HTTP status code
     class ServiceUnavailable < ServerError; end
   end
 end

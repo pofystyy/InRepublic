@@ -1,12 +1,10 @@
 require_relative 'auth_api'
-require_relative 'request'
 require_relative 'resources_api'
 
-module Inrepublic
+module InRepublic
   class Spot
-    include Inrepublic::AuthApi
-    include Inrepublic::Request
-    include Inrepublic::ResourcesApi
+    include InRepublic::AuthApi
+    include InRepublic::ResourcesApi
 
     attr_reader :jwt_token
 

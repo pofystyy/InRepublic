@@ -1,8 +1,8 @@
 require_relative 'request'
 
-module Inrepublic
+module InRepublic
   module AuthApi
-    include Inrepublic::Request
+    include InRepublic::Request
 
     INREPUBLIC_AUTH_API_URI = 'https://auth.aaa.webmil.com.ua/spots/signin'.freeze
 

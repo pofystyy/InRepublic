@@ -1,8 +1,8 @@
 require_relative 'request'
 
-module Inrepublic
+module InRepublic
   module ResourcesApi
-    include Inrepublic::Request
+    include InRepublic::Request
 
     INREPUBLIC_RESOURCES_API_URI = 'https://resources.aaa.webmil.com.ua/api/v1/spots/schedule'.freeze
 
