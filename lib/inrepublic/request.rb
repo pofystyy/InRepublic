@@ -5,7 +5,8 @@ require 'json'
 module InRepublic
   module Request
 
-    HTTP_OK_CODE = 200
+    HTTP_OK_CODE      = 200
+    HTTP_CREATED_CODE = 201
 
     def get(url, options = {}, skip_auth_headers: false)
       request(:get, url, options, skip_auth_headers)
@@ -26,10 +27,11 @@ module InRepublic
       )
       request.run
       request_response = request.response
+
       request_response_code = request_response.code
 
-      if request_response_code == HTTP_OK_CODE
-         json_parse(request_response.body)
+      if request_response_code == HTTP_OK_CODE || request_response_code == HTTP_CREATED_CODE
+        json_parse(request_response.body)
       else
         InRepublic::Error.from_response(request_response_code)
       end

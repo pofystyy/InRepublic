@@ -5,8 +5,8 @@ require_relative 'schedule'
 module InRepublic
   class Spot
     def initialize(options={})
-      auth_code = options.values.join
-      jwt_token = InRepublic::AuthApi.instance.sign_in('auth_code' => auth_code)['jwt_token']
+      options.transform_keys!(&:to_s)
+      jwt_token = InRepublic::AuthApi.instance.sign_in(options)['jwt_token']
       InRepublic::ResourcesApi.instance.bearer=(jwt_token)
 
       schedule_data = InRepublic::ResourcesApi.instance.schedule
@@ -15,6 +15,10 @@ module InRepublic
 
     def work_now?
       @schedule.work_now?
+    end
+
+    def media_item
+      @schedule.media_item
     end
   end
 end
