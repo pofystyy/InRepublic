@@ -25,8 +25,13 @@ module InRepublic
     end
 
     def stop_callback(id)
-      stop_callback_path = "/campaigns/#{id}/impressions/start".freeze
+      stop_callback_path = "/campaigns/#{id}/impressions/stop".freeze
       post("#{INREPUBLIC_RESOURCES_API_URI}#{stop_callback_path}")
+    end
+
+    def heart_beat
+      heart_beat_path = '/spots/heart_beat'.freeze
+      post("#{INREPUBLIC_RESOURCES_API_URI}#{heart_beat_path}")
     end
   end
 end

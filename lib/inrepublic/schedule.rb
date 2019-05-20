@@ -4,7 +4,8 @@ require 'time'
 module InRepublic
   class Schedule
     def initialize(schedule_data)
-      @schedule = schedule_data
+      @schedule  = schedule_data
+      @campaigns = @schedule['campaigns']
     end
 
     def work_now?
@@ -17,23 +18,17 @@ module InRepublic
       allowed_range.any? { |range| range.cover?(formatted_time) }
     end
 
-    def media_item
-      InRepublic::MediaItem.new(random_media_item['id']).create_media
+    def random_media_item
+      random_media_item = random
+      InRepublic::MediaItem.new(random_media_item)
     end
 
     private
-# ----- start: for method start
-    def campaigns
-      @schedule['campaigns']
+
+    def random
+      @campaigns.sample
     end
 
-    def random_media_item
-      campaigns.sample
-    end
-# ----- end: for method start
-
-
-# ----- start: for method work_now?
     def location
       @schedule['location']
     end
@@ -49,6 +44,5 @@ module InRepublic
     def today_work_schedule_close
       today_work_schedule['close']
     end
-# ----- end: for method work_now?
   end
 end

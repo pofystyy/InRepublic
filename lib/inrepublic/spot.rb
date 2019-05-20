@@ -17,8 +17,12 @@ module InRepublic
       @schedule.work_now?
     end
 
-    def media_item
-      @schedule.media_item
+    def random_media_item
+      @schedule.random_media_item
+    end
+
+    def heart_beat
+      InRepublic::ResourcesApi.instance.heart_beat
     end
   end
 end

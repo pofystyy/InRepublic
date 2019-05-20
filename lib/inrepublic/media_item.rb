@@ -2,34 +2,42 @@ require_relative 'resources_api'
 
 module InRepublic
   class MediaItem
-    def initialize(item)
-      @item = item
+    def initialize(media_item)
+      @media_item = media_item
     end
 
-    def create_media
-      start_callback
-      media_data = media
-      stop_callback
+    def name
+      metadata['filename']
+    end
 
-      media_data
+    def duration
+      @media_item['duration']
+    end
+
+    def start_callback
+      InRepublic::ResourcesApi.instance.start_callback(media_id)
+    end
+
+    def stop_callback
+      InRepublic::ResourcesApi.instance.stop_callback(media_id)
     end
 
     private
 
-    def start_callback
-      @start_callback = InRepublic::ResourcesApi.instance.start_callback(@item)
+    def media_id
+      @media_item['id']
     end
 
-    def media
-      [@item, media_duration]
+    def file_data
+      @media_item['file_data']
     end
 
-    def stop_callback
-      InRepublic::ResourcesApi.instance.stop_callback(@item)
+    def original
+      file_data['original']
     end
 
-    def media_duration
-      @start_callback['duration']
+    def metadata
+      original['metadata']
     end
   end
 end
