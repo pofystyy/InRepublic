@@ -1,9 +1,11 @@
+require_relative 'media_item'
 require 'time'
 
 module InRepublic
   class Schedule
     def initialize(schedule_data)
-      @schedule = schedule_data
+      @schedule  = schedule_data
+      @campaigns = @schedule['campaigns']
     end
 
     def work_now?
@@ -16,7 +18,16 @@ module InRepublic
       allowed_range.any? { |range| range.cover?(formatted_time) }
     end
 
+    def random_media_item
+      random_media_item = random
+      InRepublic::MediaItem.new(random_media_item)
+    end
+
     private
+
+    def random
+      @campaigns.sample
+    end
 
     def location
       @schedule['location']
