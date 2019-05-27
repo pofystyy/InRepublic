@@ -2,42 +2,25 @@ require_relative 'resources_api'
 
 module InRepublic
   class MediaItem
+    attr_reader :media_item
     def initialize(media_item)
       @media_item = media_item
     end
 
-    def name
-      metadata['filename']
+    def id
+      media_item['id']
     end
 
     def duration
-      @media_item['duration']
+      media_item['duration']
     end
 
     def start_callback
-      InRepublic::ResourcesApi.instance.start_callback(media_id)
+      InRepublic::ResourcesApi.instance.start_callback(id)
     end
 
     def stop_callback
-      InRepublic::ResourcesApi.instance.stop_callback(media_id)
-    end
-
-    private
-
-    def media_id
-      @media_item['id']
-    end
-
-    def file_data
-      @media_item['file_data']
-    end
-
-    def original
-      file_data['original']
-    end
-
-    def metadata
-      original['metadata']
+      InRepublic::ResourcesApi.instance.stop_callback(id)
     end
   end
 end
