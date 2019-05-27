@@ -8,15 +8,15 @@ module InRepublic
 
     attr_reader :jwt_token
 
-    INREPUBLIC_RESOURCES_API_URI = 'https://resources.aaa.webmil.com.ua/api/v1'.freeze
+    INREPUBLIC_RESOURCES_API_URI = 'http://a9e83e35.ngrok.io/api/v1'.freeze
 
     def bearer=(jwt_token)
       @jwt_token = jwt_token
     end
 
-    def schedule
-      schedule_path = '/spots/schedule'.freeze
-      get("#{INREPUBLIC_RESOURCES_API_URI}#{schedule_path}")
+    def campaigns
+      campaigns_path = '/new_schedule'.freeze
+      get("#{INREPUBLIC_RESOURCES_API_URI}#{campaigns_path}")
     end
 
     def start_callback(id)
